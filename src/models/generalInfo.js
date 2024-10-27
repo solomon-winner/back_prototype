@@ -34,6 +34,16 @@ const GeneralSchema = new mongoose.Schema({
         ref: 'BannerCard',
         required: true
     }],
+    email: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true
+    }
 }, {
     timestamps: true
 });
