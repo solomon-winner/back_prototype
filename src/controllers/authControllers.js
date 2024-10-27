@@ -12,21 +12,21 @@ export const login = async (req, res, next) => {
             return ResponseHelper.error(res, "Email and password are required", [], 400);
         }
 
-        const General = await General.findOne({ email });
+        const general = await General.findOne({ email });
 
-        if (!General) {
+        if (!general) {
             return ResponseHelper.error(res, "Invalid email or Password", [], 400);
         }
 
-        const isMatch = await bcrypt.compare(password, General.password);
+        const isMatch = await bcrypt.compare(password, general.password);
 
         if (!isMatch) {
             return ResponseHelper.error(res, "Invalid email or Password", [], 400);
         }
 
-        const token = generateToken(General);
+        const token = generateToken(general);
 
-        return ResponseHelper.success(res, "You Logged in successfully!", { token, General: new GeneralDTO(General)}, 200);
+        return ResponseHelper.success(res, "You Logged in successfully!", { token, general: new GeneralDTO(general)}, 200);
     } catch (error) {
         next(error);
     }  
