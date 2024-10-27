@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { User} from '../models/generalInfo.js';
+import { General} from '../models/generalInfo.js';
 import {generateToken} from '../services/authService.js';
 import ResponseHelper from '../helpers/responseHelper.js';
 import { GeneralDTO } from '../dtos/general/generalInfoDto.js';
@@ -12,21 +12,21 @@ export const login = async (req, res, next) => {
             return ResponseHelper.error(res, "Email and password are required", [], 400);
         }
 
-        const user = await User.findOne({ email });
+        const General = await General.findOne({ email });
 
-        if (!user) {
+        if (!General) {
             return ResponseHelper.error(res, "Invalid email or Password", [], 400);
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, General.password);
 
         if (!isMatch) {
             return ResponseHelper.error(res, "Invalid email or Password", [], 400);
         }
 
-        const token = generateToken(user);
+        const token = generateToken(General);
 
-        return ResponseHelper.success(res, "You Logged in successfully!", { token, user: new GeneralDTO(user)}, 200);
+        return ResponseHelper.success(res, "You Logged in successfully!", { token, General: new GeneralDTO(General)}, 200);
     } catch (error) {
         next(error);
     }  
