@@ -1,5 +1,5 @@
 import express from "express";
-import { addTestimony, updateTestimony, removeTestimony, getTestimony, getTestimonies } from "../controllers/TestimonyController";
+import { addTestimony, updateTestimony, removeTestimony, getTestimony, getTestimonies } from "../controllers/TestimonyController.js";
 
 const router = express.Router();
 
