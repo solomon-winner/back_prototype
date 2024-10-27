@@ -1,4 +1,4 @@
-export class GeneralDTO {
+export class GeneralForDashbrdDTO {
     constructor(_id, bannerInfo, bannerPic, aboutPic, aboutInfo, visitors, subscribers, bannerCards, createdAt, updatedAt ) {
         this.id = _id;
         this.bannerPic = bannerPic;
