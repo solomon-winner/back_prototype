@@ -1,16 +1,17 @@
 import BannerCard from "../models/BannerCards.js";
 import BannerCardDTO from "../dtos/bannerCards/bannerCardsDto.js";
 
-export const addBannerCard = async (req, res) => {
+export const addBannerCard = async (req, res, next) => {
     try {
         const { title, description} = req.body;
         const bannerCard = await BannerCard.create({
         title,
         description,
         });
-        return res.status(201).json({ bannerCard });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+        const BannerCard = bannerCard.map(card => new BannerCardDTO(card))
+        return ResponseHelper.success(res,"Farmers Fetched Successfully",BannerCard); 
+       } catch (error) {
+        next(error);
     }
 };
 export const getBannerCards = async (req, res) => {};
