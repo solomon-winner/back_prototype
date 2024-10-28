@@ -7,7 +7,7 @@ const options = {
         info: {
             title: "server prototype API",
             version:"1.0.0",
-            description: "API documentation for EUDR",
+            description: "API documentation prototype",
         },
         servers: [
             {
