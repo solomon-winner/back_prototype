@@ -45,5 +45,33 @@ export const getMessage = async (req, res, next) => {
         next(error);
     }
 };
-export const removeMessage = async (req, res, next) => {};
-export const updateMessage = async (req, res, next) => {};
+export const removeMessage = async (req, res, next) => {
+    try {
+        const existingMessage = await Message.findById(req.params.id);
+        if (!existingMessage) {
+            return ResponseHelper.error(res, "Message doesn't exist!", [], 400);
+        }
+        const message = await Message.findByIdAndDelete(req.params.id);
+        return ResponseHelper.success(res, 'Message deleted successfully');
+    }
+    catch (error) {
+        next(error);
+    }
+};
+export const updateMessage = async (req, res, next) => {
+    try {
+        const { title, description } = req.body;
+        const message = await Message.findById(req.params.id);
+        if (!message) {
+            return ResponseHelper.error(res, 'Message not found', [], 404);
+        }
+        message.title = title;
+        message.description = description;
+        await message.save();
+        return ResponseHelper.success(res, 'Message updated successfully', {
+            message: new MessageDTO(message),
+        });
+    } catch (error) {
+        next(error);
+    }
+};
