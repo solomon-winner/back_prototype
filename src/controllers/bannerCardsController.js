@@ -9,7 +9,7 @@ export const addBannerCard = async (req, res, next) => {
         description,
         });
         const BannerCard = bannerCard.map(card => new BannerCardDTO(card))
-        return ResponseHelper.success(res,"Farmers Fetched Successfully",BannerCard); 
+        return ResponseHelper.success(res,"cards Fetched Successfully",BannerCard); 
        } catch (error) {
         next(error);
     }
