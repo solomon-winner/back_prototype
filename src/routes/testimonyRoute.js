@@ -5,10 +5,39 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Testimony:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "60d0fe4f5311236168a109ca"
+ *         testimony:
+ *           type: string
+ *           example: "This is a testimony."
+ *         email:
+ *           type: string
+ *           example: "user@example.com"
+ *         verified:
+ *           type: string
+ *           example: "true"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2023-01-01T00:00:00.000Z"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2023-01-01T00:00:00.000Z"
+ */
+
+/**
+ * @swagger
  * /api/testimonies:
  *   post:
  *     summary: Add a new testimony
- *     description: Create a new testimony with title and description.
+ *     description: Create a new testimony with testimony, email, and verified status.
  *     tags: [Testimonies]
  *     requestBody:
  *       required: true
@@ -17,14 +46,18 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               testimony:
  *                 type: string
- *                 description: The title of the testimony.
- *                 example: "New Testimony"
- *               description:
+ *                 description: The content of the testimony.
+ *                 example: "This is a testimony."
+ *               email:
  *                 type: string
- *                 description: The description of the testimony.
- *                 example: "This is a new testimony."
+ *                 description: The email of the user.
+ *                 example: "user@example.com"
+ *               verified:
+ *                 type: string
+ *                 description: The verification status of the testimony.
+ *                 example: "true"
  *     responses:
  *       200:
  *         description: Testimony added successfully
@@ -56,7 +89,7 @@ router.post("/", addTestimony);
  * /api/testimonies:
  *   put:
  *     summary: Update a testimony
- *     description: Update the title and description of an existing testimony.
+ *     description: Update the content, email, and verification status of an existing testimony.
  *     tags: [Testimonies]
  *     requestBody:
  *       required: true
@@ -69,14 +102,18 @@ router.post("/", addTestimony);
  *                 type: string
  *                 description: The ID of the testimony to update.
  *                 example: "60d0fe4f5311236168a109ca"
- *               title:
+ *               testimony:
  *                 type: string
- *                 description: The new title of the testimony.
- *                 example: "Updated Testimony"
- *               description:
- *                 type: string
- *                 description: The new description of the testimony.
+ *                 description: The new content of the testimony.
  *                 example: "This is an updated testimony."
+ *               email:
+ *                 type: string
+ *                 description: The email of the user.
+ *                 example: "user@example.com"
+ *               verified:
+ *                 type: string
+ *                 description: The new verification status of the testimony.
+ *                 example: "true"
  *     responses:
  *       200:
  *         description: Testimony updated successfully

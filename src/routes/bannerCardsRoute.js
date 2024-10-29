@@ -2,6 +2,23 @@ import express from "express";
 import { addBannerCard, updateBannerCard, removeBannerCard, getBannerCards } from "../controllers/bannerCardsController.js";
 
 const router = express.Router();
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     BannerCard:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "60d0fe4f5311236168a109ca"
+ *         title:
+ *           type: string
+ *           example: "New Banner Card"
+ *         description:
+ *           type: string
+ *           example: "This is a new banner card."
+ */
 
 /**
  * @swagger

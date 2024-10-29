@@ -5,10 +5,38 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Message:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "60d0fe4f5311236168a109ca"
+ *         message:
+ *           type: string
+ *           example: "This is a message."
+ *         sm:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["sm1", "sm2"]
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2023-01-01T00:00:00.000Z"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2023-01-01T00:00:00.000Z"
+ */
+
+/**
+ * @swagger
  * /api/messages:
  *   post:
  *     summary: Add a new message
- *     description: Create a new message with title and description.
+ *     description: Create a new message with content and optional sm array.
  *     tags: [Messages]
  *     requestBody:
  *       required: true
@@ -17,14 +45,16 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               message:
  *                 type: string
- *                 description: The title of the message.
- *                 example: "New Message"
- *               description:
- *                 type: string
- *                 description: The description of the message.
- *                 example: "This is a new message."
+ *                 description: The content of the message.
+ *                 example: "This is a message."
+ *               sm:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Optional array of strings.
+ *                 example: ["sm1", "sm2"]
  *     responses:
  *       200:
  *         description: Message added successfully
@@ -56,7 +86,7 @@ router.post("/", addMessage);
  * /api/messages:
  *   put:
  *     summary: Update a message
- *     description: Update the title and description of an existing message.
+ *     description: Update the content and optional sm array of an existing message.
  *     tags: [Messages]
  *     requestBody:
  *       required: true
@@ -69,14 +99,16 @@ router.post("/", addMessage);
  *                 type: string
  *                 description: The ID of the message to update.
  *                 example: "60d0fe4f5311236168a109ca"
- *               title:
+ *               message:
  *                 type: string
- *                 description: The new title of the message.
- *                 example: "Updated Message"
- *               description:
- *                 type: string
- *                 description: The new description of the message.
+ *                 description: The new content of the message.
  *                 example: "This is an updated message."
+ *               sm:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Optional array of strings.
+ *                 example: ["sm1", "sm2"]
  *     responses:
  *       200:
  *         description: Message updated successfully

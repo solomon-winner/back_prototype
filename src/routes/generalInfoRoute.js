@@ -5,7 +5,50 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/generalinfo:
+ * components:
+ *   schemas:
+ *     GeneralInfo:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "60d0fe4f5311236168a109ca"
+ *         bannerPic:
+ *           type: string
+ *           example: "https://example.com/banner.jpg"
+ *         bannerInfo:
+ *           type: string
+ *           example: "This is the banner information."
+ *         aboutPic:
+ *           type: string
+ *           example: "https://example.com/about.jpg"
+ *         aboutInfo:
+ *           type: string
+ *           example: "This is the about information."
+ *         visitors:
+ *           type: number
+ *           example: 100
+ *         subscribers:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["subscriber1@example.com", "subscriber2@example.com"]
+ *         bannerCards:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["60d0fe4f5311236168a109ca", "60d0fe4f5311236168a109cb"]
+ *         email:
+ *           type: string
+ *           example: "contact@example.com"
+ *         password:
+ *           type: string
+ *           example: "password123"
+ */
+
+/**
+ * @swagger
+ * /api/general:
  *   post:
  *     summary: Add general information
  *     description: Create a new general information entry.
@@ -75,7 +118,7 @@ router.post("/", addGeneralInfo);
 
 /**
  * @swagger
- * /api/generalinfo:
+ * /api/general:
  *   put:
  *     summary: Update general information
  *     description: Update existing general information.
@@ -151,7 +194,7 @@ router.put("/", updateGeneralInfo);
 
 /**
  * @swagger
- * /api/generalinfo:
+ * /api/general:
  *   get:
  *     summary: Get general information
  *     description: Retrieve general information.
@@ -181,9 +224,10 @@ router.put("/", updateGeneralInfo);
  *         description: Internal server error
  */
 router.get("/", getGeneralInfo);
+
 /**
  * @swagger
- * /api/generalinfo/subscriber:
+ * /api/general/subscriber:
  *   post:
  *     summary: Add a subscriber
  *     description: Add a new subscriber to the general information.
@@ -224,7 +268,7 @@ router.post("/subscriber", addSubscribers);
 
 /**
  * @swagger
- * /api/generalinfo/subscriber:
+ * /api/general/subscriber:
  *   put:
  *     summary: Remove a subscriber
  *     description: Remove a subscriber from the general information.
@@ -265,7 +309,7 @@ router.put("/subscriber", removeSubscribers);
 
 /**
  * @swagger
- * /api/generalinfo/visitors:
+ * /api/general/visitors:
  *   put:
  *     summary: Increment visitor count
  *     description: Increment the visitor count in the general information.
@@ -298,7 +342,7 @@ router.put("/visitors", addVisitors);
 
 /**
  * @swagger
- * /api/generalinfo:
+ * /api/general:
  *   delete:
  *     summary: Delete general information
  *     description: Delete existing general information by ID.

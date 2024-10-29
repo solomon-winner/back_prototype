@@ -5,10 +5,44 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Song:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: "60d0fe4f5311236168a109ca"
+ *         title:
+ *           type: string
+ *           example: "New Song"
+ *         link:
+ *           type: string
+ *           example: "https://example.com/song.mp3"
+ *         img:
+ *           type: string
+ *           example: "https://example.com/image.jpg"
+ *         albums:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["Album 1", "Album 2"]
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2023-01-01T00:00:00.000Z"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           example: "2023-01-01T00:00:00.000Z"
+ */
+
+/**
+ * @swagger
  * /api/songs:
  *   post:
  *     summary: Add a new song
- *     description: Create a new song with title and artist.
+ *     description: Create a new song with title, link, img, and albums.
  *     tags: [Songs]
  *     requestBody:
  *       required: true
@@ -21,10 +55,20 @@ const router = express.Router();
  *                 type: string
  *                 description: The title of the song.
  *                 example: "New Song"
- *               artist:
+ *               link:
  *                 type: string
- *                 description: The artist of the song.
- *                 example: "Artist Name"
+ *                 description: The link to the song.
+ *                 example: "https://example.com/song.mp3"
+ *               img:
+ *                 type: string
+ *                 description: The image URL of the song.
+ *                 example: "https://example.com/image.jpg"
+ *               albums:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Array of album names.
+ *                 example: ["Album 1", "Album 2"]
  *     responses:
  *       200:
  *         description: Song added successfully
@@ -56,7 +100,7 @@ router.post("/", addSong);
  * /api/songs:
  *   put:
  *     summary: Update a song
- *     description: Update the title and artist of an existing song.
+ *     description: Update the title, link, img, and albums of an existing song.
  *     tags: [Songs]
  *     requestBody:
  *       required: true
@@ -73,10 +117,20 @@ router.post("/", addSong);
  *                 type: string
  *                 description: The new title of the song.
  *                 example: "Updated Song"
- *               artist:
+ *               link:
  *                 type: string
- *                 description: The new artist of the song.
- *                 example: "Updated Artist"
+ *                 description: The new link to the song.
+ *                 example: "https://example.com/song.mp3"
+ *               img:
+ *                 type: string
+ *                 description: The new image URL of the song.
+ *                 example: "https://example.com/image.jpg"
+ *               albums:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Array of album names.
+ *                 example: ["Album 1", "Album 2"]
  *     responses:
  *       200:
  *         description: Song updated successfully
