@@ -1,5 +1,5 @@
 import express from "express";
-import { addGeneralInfo, updateGeneralInfo, deleteGeneralInfo, getGeneralInfo } from "../controllers/generalInfoController.js";
+import { addGeneralInfo, updateGeneralInfo, deleteGeneralInfo, getGeneralInfo, addSubscribers, removeSubscribers, addVisitors} from "../controllers/generalInfoController.js";
 
 const router = express.Router();
 
@@ -181,6 +181,120 @@ router.put("/", updateGeneralInfo);
  *         description: Internal server error
  */
 router.get("/", getGeneralInfo);
+/**
+ * @swagger
+ * /api/generalinfo/subscriber:
+ *   post:
+ *     summary: Add a subscriber
+ *     description: Add a new subscriber to the general information.
+ *     tags: [General Information]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               subscriber:
+ *                 type: string
+ *                 description: The email of the subscriber.
+ *                 example: "subscriber@example.com"
+ *     responses:
+ *       200:
+ *         description: Subscriber added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Subscriber added successfully!"
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: General information not found
+ *       500:
+ *         description: Internal server error
+ */
+router.post("/subscriber", addSubscribers);
+
+/**
+ * @swagger
+ * /api/generalinfo/subscriber:
+ *   put:
+ *     summary: Remove a subscriber
+ *     description: Remove a subscriber from the general information.
+ *     tags: [General Information]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               subscriber:
+ *                 type: string
+ *                 description: The email of the subscriber to remove.
+ *                 example: "subscriber@example.com"
+ *     responses:
+ *       200:
+ *         description: Subscriber removed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Subscriber removed successfully!"
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: General information not found
+ *       500:
+ *         description: Internal server error
+ */
+router.put("/subscriber", removeSubscribers);
+
+/**
+ * @swagger
+ * /api/generalinfo/visitors:
+ *   put:
+ *     summary: Increment visitor count
+ *     description: Increment the visitor count in the general information.
+ *     tags: [General Information]
+ *     responses:
+ *       200:
+ *         description: Visitor count incremented successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Visitor count incremented successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     info:
+ *                       $ref: '#/components/schemas/GeneralInfo'
+ *       404:
+ *         description: General information not found
+ *       500:
+ *         description: Internal server error
+ */
+router.put("/visitors", addVisitors);
 
 /**
  * @swagger
