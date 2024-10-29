@@ -1,5 +1,5 @@
-import { SongDTO } from "../dtos/song/songDto";
-import Song from "../models/songsModel";
+import { SongDTO } from "../dtos/song/songDto.js";
+import Song from "../models/songsModel.js";
 
 export const addSong = async (req, res, next) => {
     try {

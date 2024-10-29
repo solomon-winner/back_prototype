@@ -3,13 +3,13 @@ import Message from "../models/messageModel.js";
 
 export const addMessage = async (req, res, next) => {
     try {
-        const { title, description } = req.body;
-        if (!title || !description) {
+        const { sm, message } = req.body;
+        if (!sm || !message) {
         return ResponseHelper.error(res, 'Title and description are required', [], 400);
         }
         const newMessage = new Message({
-        title,
-        description,
+        sm,
+        message,
         });
     
         await newMessage.save();

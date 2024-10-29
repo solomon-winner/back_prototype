@@ -1,5 +1,5 @@
-import { TestimonyDTO } from "../dtos/testimony/testimonyDto";
-import Testimony from "../models/testimonyModel";
+import { TestimonyDTO } from "../dtos/testimony/testimonyDto.js";
+import Testimony from "../models/testimonyModel.js";
 
 export const addTestimony = async (req, res, next) => {
     try {

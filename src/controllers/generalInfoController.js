@@ -1,5 +1,5 @@
-import { GeneralDTO } from "../dtos/general/generalInfoDto";
-import General from "../models/generalInfo";
+import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
+import General from "../models/generalInfo.js";
 
 export const getGeneralInfo = async (req, res, next) => {
     try {

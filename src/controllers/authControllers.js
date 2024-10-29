@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { General} from '../models/generalInfo.js';
+import  General from '../models/generalInfo.js';
 import {generateToken} from '../services/authService.js';
 import ResponseHelper from '../helpers/responseHelper.js';
 import { GeneralDTO } from '../dtos/general/generalInfoDto.js';
