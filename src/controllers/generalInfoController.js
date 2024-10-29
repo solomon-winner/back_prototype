@@ -16,22 +16,38 @@ export const getGeneralInfo = async (req, res, next) => {
 };
 export const updateGeneralInfo = async (req, res, next) => {
     try {
-        const { bannerPic, bannerInfo, aboutPic, aboutInfo, visitors, subscribers, bannerCards, email, password} = req.body;
+        const { bannerPic, bannerInfo, aboutPic, aboutInfo, bannerCards, email, password} = req.body;
         const info = await General.findById(req.params.id);
        
         if (!info) {
             return ResponseHelper.error(res, 'general Information not found', [], 404);
         }
 
-        info.title = title;
-        info.description = description;
-
+        if (bannerPic) info.bannerPic = bannerPic;
+        if (bannerInfo) info.bannerInfo = bannerInfo;
+        if (aboutPic) info.aboutPic = aboutPic;
+        if (aboutInfo) info.aboutInfo = aboutInfo;
+        if (bannerCards) info.bannerCards = bannerCards;
+        if (email) info.email = email;
+        if (password) info.password = await bcrypt.hash(password, 10);
+        
         await info.save();
         return ResponseHelper.success(res, 'General Information updated successfully', { info: new GeneralDTO(info) });
     } catch (error) {
         next(error);
     }
 };
+export const addSubscribers = async (req, res, next) => {
+
+}
+
+export const removeSubscribers = async (req, res, next) => {
+    
+}
+
+export const addVisitors = async (req, res, next) => {
+    
+}
 export const deleteGeneralInfo = async (req, res, next) => {
     try {
         const existingInfo = await General.findById(req.params.id);
