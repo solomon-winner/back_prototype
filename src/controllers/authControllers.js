@@ -31,3 +31,15 @@ export const login = async (req, res, next) => {
         next(error);
     }  
 }
+// export const register = (req, res, next) => {
+//     try {
+//         const {email, name, password} = req.body;
+//         if (!email || !name || !password) {
+//             ResponseHelper.error(res, "you should fill all inputs!", [], 400);
+//         }
+//         await 
+
+//     } catch (error) {
+//         next(error);
+//     }
+// }

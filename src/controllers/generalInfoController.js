@@ -16,7 +16,7 @@ export const getGeneralInfo = async (req, res, next) => {
 };
 export const updateGeneralInfo = async (req, res, next) => {
     try {
-        const { title, description } = req.body;
+        const { bannerPic, bannerInfo, aboutPic, aboutInfo, visitors, subscribers, bannerCards, email, password} = req.body;
         const info = await General.findById(req.params.id);
        
         if (!info) {

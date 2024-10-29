@@ -25,10 +25,10 @@ const GeneralSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    subscribers: {
-        type: Number,
+    subscribers: [{
+        type: String,
         required: true
-    },
+    }],
     bannerCards: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'BannerCard',
