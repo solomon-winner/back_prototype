@@ -73,7 +73,19 @@ export const removeSubscribers = async (req, res, next) => {
 }
 
 export const addVisitors = async (req, res, next) => {
-    
+    try {
+        const info = await General.findById(req.user.id);
+        if (!info) {
+            return ResponseHelper.error(res, 'General Information not found', [], 404);
+        }
+
+        info.visitors = (info.visitors || 0) + 1; 
+        await info.save();
+
+        return ResponseHelper.success(res, 'Visitor count incremented successfully', { info: new GeneralDTO(info) });
+    } catch (error) {
+        next(error);
+    }
 }
 export const deleteGeneralInfo = async (req, res, next) => {
     try {
