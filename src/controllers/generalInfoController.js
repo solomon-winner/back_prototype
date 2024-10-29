@@ -30,7 +30,7 @@ export const updateGeneralInfo = async (req, res, next) => {
         if (bannerCards) info.bannerCards = bannerCards;
         if (email) info.email = email;
         if (password) info.password = await bcrypt.hash(password, 10);
-        
+
         await info.save();
         return ResponseHelper.success(res, 'General Information updated successfully', { info: new GeneralDTO(info) });
     } catch (error) {
@@ -38,7 +38,12 @@ export const updateGeneralInfo = async (req, res, next) => {
     }
 };
 export const addSubscribers = async (req, res, next) => {
-
+    try {
+        const {subscriber} = req.body;
+        const general = await General.subscribers.push(subscriber);
+    } catch (error) {
+        next(error);
+    }
 }
 
 export const removeSubscribers = async (req, res, next) => {
