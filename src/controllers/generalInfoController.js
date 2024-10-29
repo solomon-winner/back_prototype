@@ -1,4 +1,5 @@
 import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
+import ResponseHelper from "../helpers/responseHelper.js";
 import General from "../models/generalInfo.js";
 
 export const getGeneralInfo = async (req, res, next) => {
@@ -40,7 +41,15 @@ export const updateGeneralInfo = async (req, res, next) => {
 export const addSubscribers = async (req, res, next) => {
     try {
         const {subscriber} = req.body;
-        const general = await General.subscribers.push(subscriber);
+        const info = await General.findById(req.user.id);
+        if (!info) {
+            return ResponseHelper.error(res, 'General Information not found', [], 404);
+        }
+
+        info.subscribers.push(subscriber);
+        await info.save();
+
+        return ResponseHelper.success(res, 'Subscriber added successfully!');
     } catch (error) {
         next(error);
     }
