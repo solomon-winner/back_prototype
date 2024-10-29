@@ -56,7 +56,20 @@ export const addSubscribers = async (req, res, next) => {
 }
 
 export const removeSubscribers = async (req, res, next) => {
+    try {    const {subscriber} = req.body;
+    const info = await General.findById(req.user.id);
+
+    if (!info) {
+        return ResponseHelper.error(res, 'General information not found', [], 404);
     
+    }
+
+    info.subscribers = info.subscribers.filter(sub => sub !== subscriber);
+    await info.save();
+    return ResponseHelper.success(res, 'Subscriber removed successfully!');
+    } catch {
+        next(error);
+    }
 }
 
 export const addVisitors = async (req, res, next) => {
