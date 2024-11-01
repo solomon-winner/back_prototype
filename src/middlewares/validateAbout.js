@@ -1,26 +1,35 @@
 import { validate } from 'express-validation';
 import Joi from 'joi';
-import mongoose from 'mongoose';
 
-const objectId = Joi.string().custom((value, helpers) => {
-    if (!mongoose.Types.ObjectId.isValid(value)) {
-        return helpers.message('Invalid MongoDB ID');
-    }
-    return value;
-}, 'MongoDB ObjectId Validation');
-
-const officerSchema = {
-    body: Joi.object({
-        company: objectId.required().messages({
-            'any.required': 'Company ID is required',
-        }),
-        officer: Joi.string().required().messages({
-            'any.required': 'Officer name is required',
-        }),
-        position: Joi.string().required().messages({
-            'any.required': 'Position is required',
-        }),
+const generalInfoSchema = {
+  body: Joi.object({
+    bannerInfo: Joi.string().required().trim().messages({
+      'any.required': 'Banner information is required',
+      'string.empty': 'Banner information cannot be empty',
     }),
+    subscribers: Joi.array().items(Joi.string().email().messages({
+      'string.email': 'Please provide a valid email address',
+    })).messages({
+      'array.base': 'Subscribers must be an array of email addresses',
+    }),
+    contactInfo: Joi.object({
+      email: Joi.string().email().required().trim().messages({
+        'any.required': 'Contact email is required',
+        'string.email': 'Please provide a valid email address',
+        'string.empty': 'Contact email cannot be empty',
+      }),
+      phone: Joi.string().required().trim().messages({
+        'any.required': 'Contact phone is required',
+        'string.empty': 'Contact phone cannot be empty',
+      }),
+    }).required().messages({
+      'any.required': 'Contact information is required',
+    }),
+    address: Joi.string().required().trim().messages({
+      'any.required': 'Address is required',
+      'string.empty': 'Address cannot be empty',
+    }),
+  }),
 };
 
-export const validateOfficer = validate(officerSchema, {}, {});
+export const validateGeneralInfo = validate(generalInfoSchema, {}, {});
