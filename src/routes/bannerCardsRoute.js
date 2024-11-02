@@ -75,11 +75,20 @@ router.post("/", addBannerCard);
 
 /**
  * @swagger
- * /api/bannercards:
+ * /api/bannercards/{id}:
  *   put:
  *     summary: Update a banner card
  *     description: Update the title and description of an existing banner card.
  *     tags: [Banner Cards]
+ *     security:
+ *      - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The user ID
  *     requestBody:
  *       required: true
  *       content:
@@ -87,10 +96,6 @@ router.post("/", addBannerCard);
  *           schema:
  *             type: object
  *             properties:
- *               id:
- *                 type: string
- *                 description: The ID of the banner card to update.
- *                 example: "60d0fe4f5311236168a109ca"
  *               title:
  *                 type: string
  *                 description: The new title of the banner card.
@@ -125,7 +130,7 @@ router.post("/", addBannerCard);
  *       500:
  *         description: Internal server error
  */
-router.put("/", updateBannerCard);
+router.put("/:id", updateBannerCard);
 
 /**
  * @swagger
@@ -150,7 +155,7 @@ router.get("/", getBannerCards);
 
 /**
  * @swagger
- * /api/bannercards:
+ * /api/bannercards/{id}:
  *   delete:
  *     summary: Delete a banner card
  *     description: Delete an existing banner card by ID.
@@ -183,6 +188,6 @@ router.get("/", getBannerCards);
  *       500:
  *         description: Internal server error
  */
-router.delete("/", removeBannerCard);
+router.delete("/:id", removeBannerCard);
 
 export default router;

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MessageSchema = new mongoose.Schema(
+const BannerCardsSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -18,6 +18,6 @@ const MessageSchema = new mongoose.Schema(
   },
 );
 
-const Message = mongoose.model("Message", MessageSchema);
+const BannerCards = mongoose.model("Message", BannerCardsSchema);
 
-export default Message;
+export default BannerCards;

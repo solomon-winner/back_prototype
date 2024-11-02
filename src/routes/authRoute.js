@@ -20,11 +20,11 @@ const router = express.Router();
  *               email:
  *                 type: string
  *                 description: The user's email.
- *                 example: user@example.com
+ *                 example: solomonyalew@664@gmail.com
  *               password:
  *                 type: string
  *                 description: The user's password.
- *                 example: password123
+ *                 example: 123456
  *     responses:
  *       200:
  *         description: Successful login
@@ -60,11 +60,6 @@ const router = express.Router();
  *                         lastName:
  *                           type: string
  *                           example: Doe
- *                         roles:
- *                           type: array
- *                           items:
- *                             type: string
- *                           example: ["admin"]
  *       400:
  *         description: Invalid email or password
  *         content:
@@ -118,13 +113,13 @@ router.post("/login", login);
  *             properties:
  *               firstName:
  *                 type: string
- *                 example: "John"
+ *                 example: "solomon"
  *               lastName:
  *                 type: string
- *                 example: "Doe"
+ *                 example: "yalew"
  *               email:
  *                 type: string
- *                 example: "user@example.com"
+ *                 example: "solomonyalew@664@gmail.com"
  *               password:
  *                 type: string
  *                 example: "123456"

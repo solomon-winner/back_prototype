@@ -18,11 +18,12 @@ export const addBannerCard = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getBannerCards = async (req, res, next) => {
   try {
     const bannerCards = await BannerCard.find({});
     const bannerCardsDtos = bannerCards.map(
-      (card) => new bannerCardsdDTO(card),
+      (card) => {return new bannerCardsdDTO(card)},
     );
     return ResponseHelper.success(
       res,
@@ -33,13 +34,15 @@ export const getBannerCards = async (req, res, next) => {
     next(error);
   }
 };
+
 export const removeBannerCard = async (req, res, next) => {
   try {
-    const existingCard = await BannerCard.findById(req.params.id);
+    const {id} = req.params.id;
+    const existingCard = await BannerCard.findById(id);
     if (!existingCard) {
       return ResponseHelper.error(res, "Card doesn't exist!", [], 400);
     }
-    const card = await BannerCard.findByIdAndDelete(req.params.id);
+    const card = await BannerCard.findByIdAndDelete(id);
 
     if (!card) {
       return ResponseHelper.error(res, "Card not found", [], 404);
