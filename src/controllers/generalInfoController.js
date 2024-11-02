@@ -154,7 +154,7 @@ export const deleteGeneralInfo = async (req, res, next) => {
 };
 export const addGeneralInfo = async (req, res, next) => {
   try {
-    const { title, description } = req.body;
+    const { bannerPic, bannerInfo, aboutPic, aboutInfo } = req.body;
     if (!title || !description) {
       return ResponseHelper.error(
         res,
@@ -164,8 +164,10 @@ export const addGeneralInfo = async (req, res, next) => {
       );
     }
     const newInfo = new General({
-      title,
-      description,
+        bannerPic, 
+        bannerInfo, 
+        aboutPic, 
+        aboutInfo
     });
 
     await newInfo.save();
