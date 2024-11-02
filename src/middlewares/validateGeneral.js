@@ -2,7 +2,6 @@ import { validate } from 'express-validation';
 import Joi from 'joi';
 import mongoose from 'mongoose';
 
-// Custom validation for MongoDB ObjectId using regular expression
 const objectId = Joi.string().custom((value, helpers) => {
     if (!mongoose.Types.ObjectId.isValid(value)) {
         return helpers.message('Invalid MongoDB ID');
