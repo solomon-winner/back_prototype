@@ -42,15 +42,27 @@ export const login = async (req, res, next) => {
   }
 };
 
-// export const register = (req, res, next) => {
-//     try {
-//         const {email, name, password} = req.body;
-//         if (!email || !name || !password) {
-//             ResponseHelper.error(res, "you should fill all inputs!", [], 400);
-//         }
-//         await
+export const register = async (req, res, next) => {
+  try {
+      const { firstName, lastName, email, password } = req.body;
 
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+      if (!firstName || !lastName || !email || !password) {
+          return ResponseHelper.error(res, 'All fields are required', [], 400);
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 12);
+
+      const newUser = new User({
+          firstName,
+          lastName,
+          email,
+          password: hashedPassword,
+      });
+
+      await newUser.save();
+
+      return ResponseHelper.success(res, 'User registered successfully', new UserDTO(newUser), 201);
+  } catch (error) {
+      next(error);
+  }
+};

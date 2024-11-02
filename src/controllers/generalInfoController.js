@@ -15,6 +15,7 @@ export const getGeneralInfo = async (req, res, next) => {
     next(error);
   }
 };
+
 export const updateGeneralInfo = async (req, res, next) => {
   try {
     const {
@@ -55,6 +56,7 @@ export const updateGeneralInfo = async (req, res, next) => {
     next(error);
   }
 };
+
 export const addSubscribers = async (req, res, next) => {
   try {
     const { subscriber } = req.body;
