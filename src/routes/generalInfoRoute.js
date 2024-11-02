@@ -124,10 +124,6 @@ router.post("/", addGeneralInfo);
  *           schema:
  *             type: object
  *             properties:
- *               id:
- *                 type: string
- *                 description: The ID of the general information to update.
- *                 example: "60d0fe4f5311236168a109ca"
  *               bannerPic:
  *                 type: string
  *                 description: URL of the banner picture.
@@ -144,20 +140,6 @@ router.post("/", addGeneralInfo);
  *                 type: string
  *                 description: Information about the about section.
  *                 example: "This is the about information."
- *               bannerCards:
- *                 type: array
- *                 items:
- *                   type: string
- *                 description: Array of banner cards.
- *                 example: ["Card 1", "Card 2"]
- *               email:
- *                 type: string
- *                 description: Contact email.
- *                 example: "contact@example.com"
- *               password:
- *                 type: string
- *                 description: Password for the contact email.
- *                 example: "password123"
  *     responses:
  *       200:
  *         description: General information updated successfully

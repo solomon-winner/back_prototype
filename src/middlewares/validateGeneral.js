@@ -43,16 +43,7 @@ const generalSchema = {
     bannerCards: Joi.array().items(objectId).required().messages({
       "any.required": "Banner cards are required",
       "array.base": "Banner cards must be an array of MongoDB ObjectIds",
-    }),
-    email: Joi.string().email().required().trim().messages({
-      "any.required": "Email is required",
-      "string.email": "Please provide a valid email address",
-      "string.empty": "Email cannot be empty",
-    }),
-    password: Joi.string().required().trim().messages({
-      "any.required": "Password is required",
-      "string.empty": "Password cannot be empty",
-    }),
+    })
   }),
 };
 
