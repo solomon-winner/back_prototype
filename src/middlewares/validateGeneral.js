@@ -26,25 +26,8 @@ const generalSchema = {
     aboutInfo: Joi.string().required().trim().messages({
       "any.required": "About information is required",
       "string.empty": "About information cannot be empty",
-    }),
-    visitors: Joi.number().required().messages({
-      "any.required": "Visitors count is required",
-      "number.base": "Visitors count must be a number",
-    }),
-    subscribers: Joi.array()
-      .items(
-        Joi.string().email().messages({
-          "string.email": "Please provide a valid email address",
-        }),
-      )
-      .messages({
-        "array.base": "Subscribers must be an array of email addresses",
-      }),
-    bannerCards: Joi.array().items(objectId).required().messages({
-      "any.required": "Banner cards are required",
-      "array.base": "Banner cards must be an array of MongoDB ObjectIds",
     })
-  }),
+  })
 };
 
 export const validateGeneral = validate(generalSchema, {}, {});
