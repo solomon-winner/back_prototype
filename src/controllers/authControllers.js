@@ -1,9 +1,8 @@
 import bcrypt from "bcrypt";
-import General from "../models/generalInfo.js";
 import { generateToken } from "../services/authService.js";
 import ResponseHelper from "../helpers/responseHelper.js";
-import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
 import User from "../models/userModel.js";
+import { UserDTO } from "../dtos/User/userDto.js";
 
 export const login = async (req, res, next) => {
   try {
@@ -35,7 +34,7 @@ export const login = async (req, res, next) => {
     return ResponseHelper.success(
       res,
       "You Logged in successfully!",
-      { token, general: new GeneralDTO(general) },
+      { token, general: new UserDTO(general) },
       200,
     );
   } catch (error) {
