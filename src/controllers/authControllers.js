@@ -3,6 +3,7 @@ import General from "../models/generalInfo.js";
 import { generateToken } from "../services/authService.js";
 import ResponseHelper from "../helpers/responseHelper.js";
 import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
+import User from "../models/userModel.js";
 
 export const login = async (req, res, next) => {
   try {
@@ -17,7 +18,7 @@ export const login = async (req, res, next) => {
       );
     }
 
-    const general = await General.findOne({ email });
+    const general = await User.findOne({ email });
 
     if (!general) {
       return ResponseHelper.error(res, "Invalid email or Password", [], 400);
@@ -52,7 +53,7 @@ export const register = async (req, res, next) => {
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const newUser = new General({
+      const newUser = new User({
           firstName,
           lastName,
           email,
