@@ -1,18 +1,24 @@
 import mongoose from "mongoose";
 
-const MessageSchema = new mongoose.Schema({
+const MessageSchema = new mongoose.Schema(
+  {
     message: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
-    sm: [{
+    sm: [
+      {
         type: String,
-    }],
-}, {
-    timestamps: true
-});
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  },
+);
 
-const Message = mongoose.models.Message || mongoose.model("Message", MessageSchema);
+const Message =
+  mongoose.models.Message || mongoose.model("Message", MessageSchema);
 
 export default Message;

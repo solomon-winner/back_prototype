@@ -1,5 +1,13 @@
 import express from "express";
-import { addGeneralInfo, updateGeneralInfo, deleteGeneralInfo, getGeneralInfo, addSubscribers, removeSubscribers, addVisitors} from "../controllers/generalInfoController.js";
+import {
+  addGeneralInfo,
+  updateGeneralInfo,
+  deleteGeneralInfo,
+  getGeneralInfo,
+  addSubscribers,
+  removeSubscribers,
+  addVisitors,
+} from "../controllers/generalInfoController.js";
 
 const router = express.Router();
 
@@ -76,20 +84,6 @@ const router = express.Router();
  *                 type: string
  *                 description: Information about the about section.
  *                 example: "This is the about information."
- *               bannerCards:
- *                 type: array
- *                 items:
- *                   type: string
- *                 description: Array of banner cards.
- *                 example: ["Card 1", "Card 2"]
- *               email:
- *                 type: string
- *                 description: Contact email.
- *                 example: "contact@example.com"
- *               password:
- *                 type: string
- *                 description: Password for the contact email.
- *                 example: "password123"
  *     responses:
  *       200:
  *         description: General information added successfully

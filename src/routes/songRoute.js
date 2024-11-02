@@ -1,5 +1,11 @@
 import express from "express";
-import { addSong, updateSong, removeSong, getSong, getSongs } from "../controllers/songController.js";
+import {
+  addSong,
+  updateSong,
+  removeSong,
+  getSong,
+  getSongs,
+} from "../controllers/songController.js";
 
 const router = express.Router();
 

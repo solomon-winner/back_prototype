@@ -1,5 +1,10 @@
 import express from "express";
-import { addBannerCard, updateBannerCard, removeBannerCard, getBannerCards } from "../controllers/bannerCardsController.js";
+import {
+  addBannerCard,
+  updateBannerCard,
+  removeBannerCard,
+  getBannerCards,
+} from "../controllers/bannerCardsController.js";
 
 const router = express.Router();
 /**
