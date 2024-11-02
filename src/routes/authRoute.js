@@ -103,5 +103,61 @@ const router = express.Router();
  *                   example: []
  */
 router.post("/login", login);
+/**
+ * @swagger
+ * /api/authentication/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               firstName:
+ *                 type: string
+ *                 example: "John"
+ *               lastName:
+ *                 type: string
+ *                 example: "Doe"
+ *               email:
+ *                 type: string
+ *                 example: "user@example.com"
+ *               password:
+ *                 type: string
+ *                 example: "123456"
+ *             required:
+ *               - firstName
+ *               - lastName
+ *               - email
+ *               - password
+ *     responses:
+ *       "201":
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 firstName:
+ *                   type: string
+ *                   example: "John"
+ *                 lastName:
+ *                   type: string
+ *                   example: "Doe"
+ *                 email:
+ *                   type: string
+ *                   example: "user@example.com"
+ *                 password:
+ *                    type: string
+ *                    example: password123
+ *       "400":
+ *         description: User already exists
+ *       "500":
+ *         description: Internal Server Error
+ */
 router.post("/register", register);
+
 export default router;
