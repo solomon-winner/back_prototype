@@ -23,20 +23,17 @@ const GeneralSchema = new mongoose.Schema(
       trim: true,
     },
     visitors: {
-      type: Number,
-      required: true,
+      type: Number
     },
     subscribers: [
       {
-        type: String,
-        required: true,
-      },
+        type: String
+      }
     ],
     bannerCards: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "BannerCard",
-        required: true,
       },
     ]
   },

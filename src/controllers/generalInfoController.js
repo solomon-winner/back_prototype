@@ -157,10 +157,10 @@ export const deleteGeneralInfo = async (req, res, next) => {
 export const addGeneralInfo = async (req, res, next) => {
   try {
     const { bannerPic, bannerInfo, aboutPic, aboutInfo } = req.body;
-    if (!title || !description) {
+    if (!bannerPic || !bannerInfo || !aboutInfo || !aboutPic) {
       return ResponseHelper.error(
         res,
-        "Title and description are required",
+        "all fields are required!",
         [],
         400,
       );
