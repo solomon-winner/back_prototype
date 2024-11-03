@@ -1,5 +1,5 @@
 export class TestimonyFprDashbrdDTO {
-  constructor(_id, email, testimony, verified, createdAt, updatedAt) {
+  constructor({_id, email, testimony, verified, createdAt, updatedAt}) {
     this.id = _id;
     this.email = email;
     this.testimony = testimony;

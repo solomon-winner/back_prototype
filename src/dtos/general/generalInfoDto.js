@@ -1,5 +1,5 @@
 export class GeneralDTO {
-  constructor(_id, bannerInfo, bannerPic, aboutPic, aboutInfo, bannerCards) {
+  constructor({_id, bannerInfo, bannerPic, aboutPic, aboutInfo, bannerCards}) {
     this.id = _id;
     this.bannerPic = bannerPic;
     this.bannerInfo = bannerInfo;

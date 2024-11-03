@@ -1,5 +1,5 @@
 export class SongDTO {
-  constructor(_id, title, link, img, albums, createdAt, updatedAt) {
+  constructor({_id, title, link, img, albums, createdAt, updatedAt}) {
     this.id = _id;
     this.title = title;
     this.link = link;

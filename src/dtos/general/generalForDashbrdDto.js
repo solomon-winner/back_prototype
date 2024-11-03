@@ -1,5 +1,5 @@
 export class GeneralForDashbrdDTO {
-  constructor(
+  constructor({
     _id,
     bannerInfo,
     bannerPic,
@@ -9,7 +9,7 @@ export class GeneralForDashbrdDTO {
     subscribers,
     bannerCards,
     createdAt,
-    updatedAt,
+    updatedAt}
   ) {
     this.id = _id;
     this.bannerPic = bannerPic;

@@ -23,7 +23,7 @@ export const getBannerCards = async (req, res, next) => {
   try {
     const bannerCards = await BannerCard.find({});
     const bannerCardsDtos = bannerCards.map(
-      (card) => {return new bannerCardsdDTO(card)},
+      (card) => new bannerCardsdDTO(card)
     );
     return ResponseHelper.success(
       res,
