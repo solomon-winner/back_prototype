@@ -18,16 +18,16 @@ export const getGeneralInfo = async (req, res, next) => {
 
 export const updateGeneralInfo = async (req, res, next) => {
   try {
+    const {id} = req.params;
     const {
       bannerPic,
       bannerInfo,
       aboutPic,
       aboutInfo,
       bannerCards,
-      email,
-      password,
+
     } = req.body;
-    const info = await General.findById(req.params.id);
+    const info = await General.findById(id);
 
     if (!info) {
       return ResponseHelper.error(
@@ -43,8 +43,6 @@ export const updateGeneralInfo = async (req, res, next) => {
     if (aboutPic) info.aboutPic = aboutPic;
     if (aboutInfo) info.aboutInfo = aboutInfo;
     if (bannerCards) info.bannerCards = bannerCards;
-    if (email) info.email = email;
-    if (password) info.password = await bcrypt.hash(password, 10);
 
     await info.save();
     return ResponseHelper.success(
@@ -127,7 +125,10 @@ export const addVisitors = async (req, res, next) => {
 };
 export const deleteGeneralInfo = async (req, res, next) => {
   try {
-    const existingInfo = await General.findById(req.params.id);
+    const {id} = req.params;
+    console.log("..d..d.d..d.d..d..d..d",id, req.params);
+    const existingInfo = await General.findById(id);
+    console.log(id,existingInfo);
     if (!existingInfo) {
       return ResponseHelper.error(
         res,
@@ -136,16 +137,8 @@ export const deleteGeneralInfo = async (req, res, next) => {
         400,
       );
     }
-    const info = await General.findByIdAndDelete(req.params.id);
+    await General.findByIdAndDelete(id);
 
-    if (!info) {
-      return ResponseHelper.error(
-        res,
-        "General Information not found",
-        [],
-        404,
-      );
-    }
     return ResponseHelper.success(
       res,
       "General Information deleted successfully",

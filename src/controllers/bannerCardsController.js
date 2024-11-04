@@ -44,9 +44,6 @@ export const removeBannerCard = async (req, res, next) => {
     }
     const card = await BannerCard.findByIdAndDelete(id);
 
-    if (!card) {
-      return ResponseHelper.error(res, "Card not found", [], 404);
-    }
     return ResponseHelper.success(res, "Card deleted successfully");
   } catch (error) {
     next(error);
