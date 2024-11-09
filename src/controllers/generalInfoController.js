@@ -126,7 +126,6 @@ export const addVisitors = async (req, res, next) => {
 export const deleteGeneralInfo = async (req, res, next) => {
   try {
     const {id} = req.params;
-    console.log("..d..d.d..d.d..d..d..d",id, req.params);
     const existingInfo = await General.findById(id);
     console.log(id,existingInfo);
     if (!existingInfo) {
