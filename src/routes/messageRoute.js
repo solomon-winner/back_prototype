@@ -89,11 +89,20 @@ router.post("/", addMessage);
 
 /**
  * @swagger
- * /api/messages:
+ * /api/messages/{id}:
  *   put:
  *     summary: Update a message
  *     description: Update the content and optional sm array of an existing message.
  *     tags: [Messages]
+ *     security:
+ *      - bearerAuth: []
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *        description: The user ID
  *     requestBody:
  *       required: true
  *       content:
@@ -101,10 +110,6 @@ router.post("/", addMessage);
  *           schema:
  *             type: object
  *             properties:
- *               id:
- *                 type: string
- *                 description: The ID of the message to update.
- *                 example: "60d0fe4f5311236168a109ca"
  *               message:
  *                 type: string
  *                 description: The new content of the message.
@@ -141,7 +146,7 @@ router.post("/", addMessage);
  *       500:
  *         description: Internal server error
  */
-router.put("/", updateMessage);
+router.put("/:id", updateMessage);
 
 /**
  * @swagger
@@ -206,13 +211,13 @@ router.get("/:id", getMessage);
 
 /**
  * @swagger
- * /api/messages:
+ * /api/messages/{id}:
  *   delete:
  *     summary: Delete a message
  *     description: Delete an existing message by ID.
  *     tags: [Messages]
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: id
  *         schema:
  *           type: string
@@ -239,6 +244,6 @@ router.get("/:id", getMessage);
  *       500:
  *         description: Internal server error
  */
-router.delete("/", removeMessage);
+router.delete("/:id", removeMessage);
 
 export default router;

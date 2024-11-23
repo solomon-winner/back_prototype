@@ -1,34 +1,33 @@
 import { MessageDTO } from "../dtos/message/messageDto.js";
-import Message from "../models/messageModel.js";
 import ResponseHelper from "../helpers/responseHelper.js";
+import Messages from "../models/messageModel.js";
 
 export const addMessage = async (req, res, next) => {
   try {
+
     const { sm, message } = req.body;
     if (!sm || !message) {
       return ResponseHelper.error(
         res,
-        "Title and description are required",
+        "Fill all fields please!",
         [],
         400,
       );
     }
-    const newMessage = new Message({
+    const newMessage = new Messages({
       sm,
       message,
     });
 
     await newMessage.save();
-    return ResponseHelper.success(res, "Message added Successfully", {
-      message: new MessageDTO(newMessage),
-    });
+    return ResponseHelper.success(res, "Message added Successfully", new MessageDTO(newMessage));
   } catch (error) {
     next(error);
   }
 };
 export const getMessages = async (req, res, next) => {
   try {
-    const messages = await Message.find({});
+    const messages = await Messages.find({});
     const messagesDtos = messages.map((message) => new MessageDTO(message));
     return ResponseHelper.success(
       res,
@@ -42,7 +41,7 @@ export const getMessages = async (req, res, next) => {
 export const getMessage = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const message = await Message.findById(id);
+    const message = await Messages.findById(id);
     if (!message) {
       return ResponseHelper.error(res, "Message not found", [], 404);
     }
@@ -55,11 +54,11 @@ export const getMessage = async (req, res, next) => {
 };
 export const removeMessage = async (req, res, next) => {
   try {
-    const existingMessage = await Message.findById(req.params.id);
+    const existingMessage = await Messages.findById(req.params.id);
     if (!existingMessage) {
       return ResponseHelper.error(res, "Message doesn't exist!", [], 400);
     }
-    const message = await Message.findByIdAndDelete(req.params.id);
+    const message = await Messages.findByIdAndDelete(req.params.id);
     return ResponseHelper.success(res, "Message deleted successfully");
   } catch (error) {
     next(error);
@@ -67,16 +66,18 @@ export const removeMessage = async (req, res, next) => {
 };
 export const updateMessage = async (req, res, next) => {
   try {
-    const { title, description } = req.body;
-    const message = await Message.findById(req.params.id);
+    const { message, sm } = req.body;
+    const Message = await Messages.findById(req.params.id);
     if (!message) {
       return ResponseHelper.error(res, "Message not found", [], 404);
     }
-    message.title = title;
-    message.description = description;
-    await message.save();
+    Message.message = message;
+    if (sm) {
+      Message.sm = sm;
+    }
+    await Message.save();
     return ResponseHelper.success(res, "Message updated successfully", {
-      message: new MessageDTO(message),
+      Message: new MessageDTO(Message),
     });
   } catch (error) {
     next(error);
