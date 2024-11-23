@@ -101,7 +101,8 @@ export const removeSubscribers = async (req, res, next) => {
 
 export const addVisitors = async (req, res, next) => {
   try {
-    const info = await General.findById(req.user.id);
+    const info = await General.find({});
+    console.log("------->",info)
     if (!info) {
       return ResponseHelper.error(
         res,
@@ -111,7 +112,7 @@ export const addVisitors = async (req, res, next) => {
       );
     }
 
-    info.visitors = (info.visitors || 0) + 1;
+    info[0].visitors = (info.visitors || 0) + 1;
     await info.save();
 
     return ResponseHelper.success(

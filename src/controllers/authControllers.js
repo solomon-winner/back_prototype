@@ -3,7 +3,6 @@ import { generateToken } from "../services/authService.js";
 import ResponseHelper from "../helpers/responseHelper.js";
 import User from "../models/userModel.js";
 import { UserDTO } from "../dtos/User/userDto.js";
-// import { UserDTO } from "../dtos/user/userDto.js";
 
 export const login = async (req, res, next) => {
   try {

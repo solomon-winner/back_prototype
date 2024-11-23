@@ -331,7 +331,7 @@ router.put("/visitors", addVisitors);
  *   delete:
  *     summary: Delete general information
  *     description: Delete existing general information by ID.
- *     tags: [GeneralInfo]
+ *     tags: [General Information]
  *     security:
  *       - bearerAuth: []
  *     parameters:
