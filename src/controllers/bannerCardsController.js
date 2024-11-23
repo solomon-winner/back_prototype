@@ -37,12 +37,12 @@ export const getBannerCards = async (req, res, next) => {
 
 export const removeBannerCard = async (req, res, next) => {
   try {
-    const {id} = req.params.id;
+    const {id} = req.params;
     const existingCard = await BannerCard.findById(id);
     if (!existingCard) {
       return ResponseHelper.error(res, "Card doesn't exist!", [], 400);
     }
-    const card = await BannerCard.findByIdAndDelete(id);
+    await BannerCard.findByIdAndDelete(id);
 
     return ResponseHelper.success(res, "Card deleted successfully");
   } catch (error) {

@@ -161,7 +161,7 @@ router.get("/", getBannerCards);
  *     description: Delete an existing banner card by ID.
  *     tags: [Banner Cards]
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: id
  *         schema:
  *           type: string
