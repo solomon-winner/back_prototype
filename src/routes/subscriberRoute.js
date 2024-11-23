@@ -1,5 +1,5 @@
-import express from express;
-
+import express from "express";
+import { addSubscribers, removeSubscribers } from "../controllers/subscriberController.js";
 const router = express.Router()
 
 
@@ -42,7 +42,7 @@ const router = express.Router()
  *       500:
  *         description: Internal server error
  */
-router.post("/subscriber", addSubscribers);
+router.post("/", addSubscribers);
 
 /**
  * @swagger
@@ -83,6 +83,6 @@ router.post("/subscriber", addSubscribers);
  *       500:
  *         description: Internal server error
  */
-router.put("/subscriber", removeSubscribers);
+router.put("/", removeSubscribers);
 
 export default router;

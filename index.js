@@ -4,11 +4,13 @@ import dotenv from "dotenv";
 import { dbConfig } from "./src/config/dbConfig.js";
 import { errorHandler } from "./src/helpers/errorHandler.js";
 import AuthRoutes from "./src/routes/authRoute.js";
-import bannerCardsRoutes from "./src/routes/bannerCardsRoute.js";
+import BannerCardsRoutes from "./src/routes/bannerCardsRoute.js";
 import GeneralInforRoutes from "./src/routes/generalInfoRoute.js";
 import MessageRoutes from "./src/routes/messageRoute.js";
-import songRoutes from "./src/routes/songRoute.js";
+import SongRoutes from "./src/routes/songRoute.js";
 import TestimonyRoutes from "./src/routes/testimonyRoute.js";
+import SubscriberRoutes from "./src/routes/subscriberRoute.js";
+import VisitorRoutes from "./src/routes/visitorRoute.js";
 import { specs, swaggerUi } from "./src/config/swaggerConfig.js";
 
 dotenv.config();
@@ -26,10 +28,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/authentication", AuthRoutes);
-app.use("/api/bannercards", bannerCardsRoutes);
+app.use("/api/bannercards", BannerCardsRoutes);
 app.use("/api/general", GeneralInforRoutes);
 app.use("/api/messages", MessageRoutes);
-app.use("/api/songs", songRoutes);
+app.use("/api/songs", SongRoutes);
+app.use("/api/subscribers", SubscriberRoutes);
+app.use("/api/visitors",VisitorRoutes);
 app.use("/api/testimonies", TestimonyRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 

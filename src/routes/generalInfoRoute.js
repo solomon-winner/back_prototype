@@ -3,10 +3,7 @@ import {
   addGeneralInfo,
   updateGeneralInfo,
   deleteGeneralInfo,
-  getGeneralInfo,
-  addSubscribers,
-  removeSubscribers,
-  addVisitors,
+  getGeneralInfo
 } from "../controllers/generalInfoController.js";
 
 const router = express.Router();
@@ -209,39 +206,6 @@ router.put("/:id", updateGeneralInfo);
  *         description: Internal server error
  */
 router.get("/", getGeneralInfo);
-
-/**
- * @swagger
- * /api/general/visitors:
- *   put:
- *     summary: Increment visitor count
- *     description: Increment the visitor count in the general information.
- *     tags: [General Information]
- *     responses:
- *       200:
- *         description: Visitor count incremented successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 message:
- *                   type: string
- *                   example: "Visitor count incremented successfully"
- *                 data:
- *                   type: object
- *                   properties:
- *                     info:
- *                       $ref: '#/components/schemas/GeneralInfo'
- *       404:
- *         description: General information not found
- *       500:
- *         description: Internal server error
- */
-router.put("/visitors", addVisitors);
 
 /**
  * @swagger

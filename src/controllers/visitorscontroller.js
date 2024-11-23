@@ -1,10 +1,10 @@
-import { GeneralDTO } from "../dtos/general/generalInfoDto";
-import General from "../models/generalInfo";
+import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
+import ResponseHelper from "../helpers/responseHelper.js";
+import General from "../models/generalInfo.js";
 
 export const addVisitors = async (req, res, next) => {
     try {
       const info = await General.find({});
-      console.log("------->",info)
       if (!info) {
         return ResponseHelper.error(
           res,
@@ -13,9 +13,9 @@ export const addVisitors = async (req, res, next) => {
           404,
         );
       }
-  
-      info[0].visitors = (info.visitors || 0) + 1;
-      await info.save();
+      const IncreasedVisitor = info[0];
+      IncreasedVisitor.visitors = (IncreasedVisitor.visitors || 0) + 1;
+      await IncreasedVisitor.save();
   
       return ResponseHelper.success(
         res,
