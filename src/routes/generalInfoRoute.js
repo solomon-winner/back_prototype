@@ -109,20 +109,13 @@ router.post("/", addGeneralInfo);
 
 /**
  * @swagger
- * /api/general/{id}:
+ * /api/general/:
  *   put:
  *     summary: Update general information
  *     description: Update existing general information.
  *     tags: [General Information]
  *     security:
  *      - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The user ID
  *     requestBody:
  *       required: true
  *       content:
@@ -172,7 +165,7 @@ router.post("/", addGeneralInfo);
  *       500:
  *         description: Internal server error
  */
-router.put("/:id", updateGeneralInfo);
+router.put("/", updateGeneralInfo);
 
 /**
  * @swagger
@@ -209,26 +202,19 @@ router.get("/", getGeneralInfo);
 
 /**
  * @swagger
- * /api/general/{id}:
+ * /api/general/:
  *   delete:
  *     summary: Delete general information
  *     description: Delete existing general information by ID.
  *     tags: [General Information]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the general information to delete.
  *     responses:
  *       200:
  *         description: General information deleted successfully
  *       400:
  *         description: General information doesn't exist
  */
-router.delete('/:id', deleteGeneralInfo);
+router.delete('/', deleteGeneralInfo);
 
 export default router;

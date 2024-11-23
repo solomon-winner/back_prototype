@@ -4,12 +4,11 @@ import General from "../models/generalInfo.js";
 
 export const getGeneralInfo = async (req, res, next) => {
   try {
-    const generalInfo = await General.find({});
-    const generalInfoDtos = generalInfo.map((info) => new GeneralDTO(info));
+    const generalInfo = await General.findOne();
     return ResponseHelper.success(
       res,
       "General Information fetched successfully",
-      generalInfoDtos,
+      new GeneralDTO(generalInfo),
     );
   } catch (error) {
     next(error);
@@ -18,7 +17,6 @@ export const getGeneralInfo = async (req, res, next) => {
 
 export const updateGeneralInfo = async (req, res, next) => {
   try {
-    const {id} = req.params;
     const {
       bannerPic,
       bannerInfo,
@@ -27,7 +25,7 @@ export const updateGeneralInfo = async (req, res, next) => {
       bannerCards,
 
     } = req.body;
-    const info = await General.findById(id);
+    const info = await General.findOne();
 
     if (!info) {
       return ResponseHelper.error(
@@ -57,9 +55,7 @@ export const updateGeneralInfo = async (req, res, next) => {
 
 export const deleteGeneralInfo = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const existingInfo = await General.findById(id);
-    console.log(id,existingInfo);
+    const existingInfo = await General.findOneAndDelete();
     if (!existingInfo) {
       return ResponseHelper.error(
         res,
@@ -68,8 +64,6 @@ export const deleteGeneralInfo = async (req, res, next) => {
         400,
       );
     }
-    await General.findByIdAndDelete(id);
-
     return ResponseHelper.success(
       res,
       "General Information deleted successfully",
