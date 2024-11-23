@@ -1,27 +1,16 @@
-import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
 import ResponseHelper from "../helpers/responseHelper.js";
 import General from "../models/generalInfo.js";
 
 export const addVisitors = async (req, res, next) => {
     try {
-      const info = await General.find({});
+      const info = await General.findOne();
       if (!info) {
-        return ResponseHelper.error(
-          res,
-          "General Information not found",
-          [],
-          404,
-        );
+        return ResponseHelper.error( res,"General Information not found",[],404);
       }
-      const IncreasedVisitor = info[0];
-      IncreasedVisitor.visitors = (IncreasedVisitor.visitors || 0) + 1;
-      await IncreasedVisitor.save();
+      info.visitors = (info.visitors || 0) + 1;
+      await info.save();
   
-      return ResponseHelper.success(
-        res,
-        "Visitor count incremented successfully",
-        { info: new GeneralDTO(info) },
-      );
+      return ResponseHelper.success(res,"Visitor count incremented successfully");
     } catch (error) {
       next(error);
     }

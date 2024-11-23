@@ -5,7 +5,7 @@ const router = express.Router()
 
 /**
  * @swagger
- * /api/subscriber/:
+ * /api/subscribers/:
  *   post:
  *     summary: Add a subscriber
  *     description: Add a new subscriber.
@@ -46,7 +46,7 @@ router.post("/", addSubscribers);
 
 /**
  * @swagger
- * /api/subscriber/:
+ * /api/subscribers/:
  *   put:
  *     summary: Remove a subscriber
  *     description: Remove a Subscribers.
