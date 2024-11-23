@@ -1,3 +1,4 @@
+import { GeneralDTO } from "../dtos/general/generalInfoDto";
 import General from "../models/generalInfo";
 
 export const addVisitors = async (req, res, next) => {
