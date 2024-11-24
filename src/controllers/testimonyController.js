@@ -35,7 +35,7 @@ export const getTestimonies = async (req, res, next) => {
 };
 export const getTestimony = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const {id} = req.params;
     const testimony = await Testimony.findById(id);
     if (!testimony) {
       return ResponseHelper.error(res, "Testimony not found", [], 404);
@@ -49,11 +49,12 @@ export const getTestimony = async (req, res, next) => {
 };
 export const removeTestimony = async (req, res, next) => {
   try {
-    const existingTestimony = await Testimony.findById(req.params.id);
+    const {id} = req.params;
+    const existingTestimony = await Testimony.findById(id);
     if (!existingTestimony) {
       return ResponseHelper.error(res, "Testimony doesn't exist!", [], 400);
     }
-    const testimony = await Testimony.findByIdAndDelete(req.params.id);
+    await Testimony.findByIdAndDelete(id);
     return ResponseHelper.success(res, "Testimony deleted successfully");
   } catch (error) {
     next(error);
@@ -62,7 +63,8 @@ export const removeTestimony = async (req, res, next) => {
 export const updateTestimony = async (req, res, next) => {
   try {
     const { email, testimony, verified } = req.body;
-    const Testimony = await Testimony.findById(req.params.id);
+    const {id} = req.params;
+    const Testimony = await Testimony.findById(id);
     if (!Testimony) {
       return ResponseHelper.error(res, "Testimony not found", [], 404);
     }
