@@ -244,6 +244,6 @@ router.get("/:id", getTestimony);
  *       500:
  *         description: Internal server error
  */
-router.delete("/", removeTestimony);
+router.delete("/:id", removeTestimony);
 
 export default router;
