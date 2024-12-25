@@ -72,6 +72,7 @@ export const deleteGeneralInfo = async (req, res, next) => {
     next(error);
   }
 };
+
 export const addGeneralInfo = async (req, res, next) => {
   try {
     const { bannerPic, bannerInfo, aboutPic, aboutInfo } = req.body;

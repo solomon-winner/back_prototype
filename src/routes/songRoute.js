@@ -228,13 +228,13 @@ router.get("/:id", getSong);
 
 /**
  * @swagger
- * /api/songs:
+ * /api/songs/{id}:
  *   delete:
  *     summary: Delete a song
  *     description: Delete an existing song by ID.
  *     tags: [Songs]
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: id
  *         schema:
  *           type: string
@@ -261,6 +261,6 @@ router.get("/:id", getSong);
  *       500:
  *         description: Internal server error
  */
-router.delete("/", removeSong);
+router.delete("/:id", removeSong);
 
 export default router;

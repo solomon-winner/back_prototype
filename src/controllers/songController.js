@@ -65,8 +65,8 @@ export const removeSong = async (req, res, next) => {
 };
 export const updateSong = async (req, res, next) => {
   try {
-    const { title, link, albums, img } = req.body;
-    const song = await Song.findById(req.params.id);
+    const { id, title, link, albums, img } = req.body;
+    const song = await Song.findById(id);
     if (!song) {
       return ResponseHelper.error(res, "Song not found", [], 404);
     }

@@ -50,11 +50,10 @@ export const getTestimony = async (req, res, next) => {
 export const removeTestimony = async (req, res, next) => {
   try {
     const {id} = req.params;
-    const existingTestimony = await Testimony.findById(id);
+    const existingTestimony = await Testimony.findByIdAndDelete(id);
     if (!existingTestimony) {
       return ResponseHelper.error(res, "Testimony doesn't exist!", [], 400);
     }
-    await Testimony.findByIdAndDelete(id);
     return ResponseHelper.success(res, "Testimony deleted successfully");
   } catch (error) {
     next(error);
@@ -62,18 +61,17 @@ export const removeTestimony = async (req, res, next) => {
 };
 export const updateTestimony = async (req, res, next) => {
   try {
-    const { email, testimony, verified } = req.body;
-    const {id} = req.params;
-    const Testimony = await Testimony.findById(id);
-    if (!Testimony) {
+    const { id, email, testimony, verified } = req.body;
+    const Updatedtestimony = await Testimony.findById(id);
+    if (!Updatedtestimony) {
       return ResponseHelper.error(res, "Testimony not found", [], 404);
     }
-    testimony.email = email;
-    testimony.testimony = testimony;
-    testimony.verified = verified;
-    await testimony.save();
+    Updatedtestimony.email = email;
+    Updatedtestimony.Updatedtestimony = testimony;
+    Updatedtestimony.verified = verified;
+    await Updatedtestimony.save();
     return ResponseHelper.success(res, "Testimony updated successfully", {
-      testimony: new TestimonyDTO(testimony),
+      testimony: new TestimonyDTO(Updatedtestimony),
     });
   } catch (error) {
     next(error);

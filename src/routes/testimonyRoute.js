@@ -211,13 +211,13 @@ router.get("/:id", getTestimony);
 
 /**
  * @swagger
- * /api/testimonies:
+ * /api/testimonies/{id}:
  *   delete:
  *     summary: Delete a testimony
  *     description: Delete an existing testimony by ID.
  *     tags: [Testimonies]
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: id
  *         schema:
  *           type: string
