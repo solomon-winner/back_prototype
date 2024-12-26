@@ -67,7 +67,7 @@ export const updateTestimony = async (req, res, next) => {
       return ResponseHelper.error(res, "Testimony not found", [], 404);
     }
     Updatedtestimony.email = email;
-    Updatedtestimony.Updatedtestimony = testimony;
+    Updatedtestimony.testimony = testimony;
     Updatedtestimony.verified = verified;
     await Updatedtestimony.save();
     return ResponseHelper.success(res, "Testimony updated successfully", {
