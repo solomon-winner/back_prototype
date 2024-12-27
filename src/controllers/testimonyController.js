@@ -61,7 +61,8 @@ export const removeTestimony = async (req, res, next) => {
 };
 export const updateTestimony = async (req, res, next) => {
   try {
-    const { id, email, testimony, verified } = req.body;
+    const { email, testimony, verified } = req.body;
+    const {id} = req.params;
     const Updatedtestimony = await Testimony.findById(id);
     if (!Updatedtestimony) {
       return ResponseHelper.error(res, "Testimony not found", [], 404);
@@ -69,7 +70,9 @@ export const updateTestimony = async (req, res, next) => {
     Updatedtestimony.email = email;
     Updatedtestimony.testimony = testimony;
     Updatedtestimony.verified = verified;
+
     await Updatedtestimony.save();
+    
     return ResponseHelper.success(res, "Testimony updated successfully", {
       testimony: new TestimonyDTO(Updatedtestimony),
     });

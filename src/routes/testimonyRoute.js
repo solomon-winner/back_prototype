@@ -92,11 +92,18 @@ router.post("/", addTestimony);
 
 /**
  * @swagger
- * /api/testimonies:
+ * /api/testimonies/{id}:
  *   put:
  *     summary: Update a testimony
  *     description: Update the content, email, and verification status of an existing testimony.
  *     tags: [Testimonies]
+*     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the testimony to retrieve.
  *     requestBody:
  *       required: true
  *       content:
@@ -104,10 +111,6 @@ router.post("/", addTestimony);
  *           schema:
  *             type: object
  *             properties:
- *               id:
- *                 type: string
- *                 description: The ID of the testimony to update.
- *                 example: "60d0fe4f5311236168a109ca"
  *               testimony:
  *                 type: string
  *                 description: The new content of the testimony.
@@ -146,7 +149,7 @@ router.post("/", addTestimony);
  *       500:
  *         description: Internal server error
  */
-router.put("/", updateTestimony);
+router.put("/:id", updateTestimony);
 
 /**
  * @swagger
