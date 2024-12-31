@@ -13,6 +13,7 @@ export const addSong = async (req, res, next) => {
         400,
       );
     }
+    
     const newSong = new Song({
       title,
       youtube_link,
@@ -22,6 +23,7 @@ export const addSong = async (req, res, next) => {
       img,
       albums,
     });
+
     await newSong.save();
 
     return ResponseHelper.success(res, "Song added successfully!", {
@@ -31,6 +33,7 @@ export const addSong = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getSongs = async (req, res, next) => {
   try {
     const songs = await Song.find({});
@@ -40,6 +43,7 @@ export const getSongs = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getSong = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -54,6 +58,7 @@ export const getSong = async (req, res, next) => {
     next(error);
   }
 };
+
 export const removeSong = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -66,6 +71,7 @@ export const removeSong = async (req, res, next) => {
     next(error);
   }
 };
+
 export const updateSong = async (req, res, next) => {
   try {
     const { id } = req.params;

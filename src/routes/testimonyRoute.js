@@ -97,7 +97,7 @@ router.post("/", addTestimony);
  *     summary: Update a testimony
  *     description: Update the content, email, and verification status of an existing testimony.
  *     tags: [Testimonies]
-*     parameters:
+ *     parameters:
  *       - in: path
  *         name: id
  *         schema:

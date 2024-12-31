@@ -103,11 +103,18 @@ router.post("/", addSong);
 
 /**
  * @swagger
- * /api/songs:
+ * /api/songs/{id}:
  *   put:
  *     summary: Update a song
  *     description: Update the title, link, img, and albums of an existing song.
  *     tags: [Songs]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the testimony to retrieve.
  *     requestBody:
  *       required: true
  *       content:
@@ -163,7 +170,7 @@ router.post("/", addSong);
  *       500:
  *         description: Internal server error
  */
-router.put("/", updateSong);
+router.put("/:id", updateSong);
 
 /**
  * @swagger
