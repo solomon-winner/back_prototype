@@ -56,11 +56,11 @@ export const getSong = async (req, res, next) => {
 };
 export const removeSong = async (req, res, next) => {
   try {
-    const existingSong = await Song.findById(req.params.id);
-    if (!existingSong) {
+    const { id } = req.params;
+    const deletedSong = await Song.findByIdAndDelete(id);
+    if (!deletedSong) {
       return ResponseHelper.error(res, "Song doesn't exist!", [], 400);
     }
-    const song = await Song.findByIdAndDelete(req.params.id);
     return ResponseHelper.success(res, "Song deleted successfully");
   } catch (error) {
     next(error);
@@ -76,7 +76,7 @@ export const updateSong = async (req, res, next) => {
       { title, youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums },
       { new: true }
     );
-    
+
     if (!updatedSong) {
       return ResponseHelper.error(res, "Song not found", [], 404);
     }
