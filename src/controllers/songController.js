@@ -23,7 +23,7 @@ export const addSong = async (req, res, next) => {
       albums,
     });
     await newSong.save();
-    
+
     return ResponseHelper.success(res, "Song added successfully!", {
       song: new SongDTO(newSong),
     });
@@ -68,18 +68,18 @@ export const removeSong = async (req, res, next) => {
 };
 export const updateSong = async (req, res, next) => {
   try {
-    const { id, title, link, albums, img } = req.body;
-    const song = await Song.findById(id);
-    if (!song) {
+    const { id } = req.params;
+    const { title, youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums } = req.body;
+
+    const updatedSong = await Song.findByIdAndUpdate(
+      id,
+      { title, youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums },
+      { new: true }
+    );
+    
+    if (!updatedSong) {
       return ResponseHelper.error(res, "Song not found", [], 404);
     }
-
-    song.title = title;
-    song.link = link;
-    song.albums = albums;
-    song.img = img;
-
-    await song.save();
 
     return ResponseHelper.success(res, "Song updated successfully", {
       song: new SongDTO(song),
