@@ -7,7 +7,7 @@ const SongSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    youtube_link: {
+    youtubeLink: {
       type: String,
       trim: true,
     },
