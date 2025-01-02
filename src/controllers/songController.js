@@ -4,24 +4,26 @@ import ResponseHelper from "../helpers/responseHelper.js";
 
 export const addSong = async (req, res, next) => {
   try {
-    const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, img, albums } = req.body;
-    console.log(req.body);
+    const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, albums } = req.body;
+    const img = req.file;  
+
     if (!title || !youtubeLink || !img) {
+      console.log(req.body)
       return ResponseHelper.error(
         res,
-        "Title, link, albums and img are required",
+        "Title, link, albums, and img are required",
         [],
         400,
       );
     }
-    
+
     const newSong = new Song({
       title,
       youtubeLink,
       spotifyLink,
       appleMusicLink,
       amazonLink,
-      img,
+      img: img.buffer, 
       albums,
     });
 
@@ -34,6 +36,7 @@ export const addSong = async (req, res, next) => {
     next(error);
   }
 };
+
 
 export const getSongs = async (req, res, next) => {
   try {

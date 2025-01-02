@@ -6,6 +6,7 @@ import {
   getSong,
   getSongs,
 } from "../controllers/songController.js";
+import upload from "../middlewares/upload.js";
 
 const router = express.Router();
 
@@ -99,7 +100,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post("/", addSong);
+router.post("/", upload.single('img'), addSong);
 
 /**
  * @swagger

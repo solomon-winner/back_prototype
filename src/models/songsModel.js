@@ -25,7 +25,7 @@ const SongSchema = new mongoose.Schema(
     },
 
     img: {
-      type: String,
+      type: Buffer,
       required: true,
       trim: true,
     },
