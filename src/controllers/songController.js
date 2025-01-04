@@ -8,7 +8,9 @@ export const addSong = async (req, res, next) => {
     const img = req.file;  
 
     if (!title || !youtubeLink || !img) {
-      console.log(req.body)
+      console.log('req.body:', req.body)
+      console.log('req.file:', req.file);
+
       return ResponseHelper.error(
         res,
         "Title, link, albums, and img are required",
@@ -16,7 +18,7 @@ export const addSong = async (req, res, next) => {
         400,
       );
     }
-
+    
     const newSong = new Song({
       title,
       youtubeLink,
