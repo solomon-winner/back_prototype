@@ -100,13 +100,8 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post("/", (req, res, next) => {
-  console.log("Request hit the route");
-  next();
-}, upload.single('img'), (req, res) => {
-  console.log("After multer - req.file:", req.file);
-  res.send("Upload complete");
-});
+
+router.post("/", upload.single('img'), addSong);
 
 /**
  * @swagger

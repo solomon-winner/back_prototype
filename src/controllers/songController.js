@@ -4,7 +4,14 @@ import ResponseHelper from "../helpers/responseHelper.js";
 
 export const addSong = async (req, res, next) => {
   try {
-    const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, albums } = req.body;
+    const { 
+      title, 
+      youtubeLink, 
+      spotifyLink, 
+      appleMusicLink, 
+      amazonLink, 
+      albums
+     } = req.body;
     const img = req.file;  
 
     if (!title || !youtubeLink || !img) {
