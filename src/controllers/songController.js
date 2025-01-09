@@ -1,6 +1,7 @@
 import { SongDTO } from "../dtos/song/songDto.js";
 import Song from "../models/songsModel.js";
 import ResponseHelper from "../helpers/responseHelper.js";
+import { ImageLink } from "../services/ImageLink.js";
 
 export const addSong = async (req, res, next) => {
   try {
@@ -12,7 +13,15 @@ export const addSong = async (req, res, next) => {
       amazonLink, 
       albums
      } = req.body;
-    const img = req.file;  
+
+     if (!req.file) {
+      return ResponseHelper.error(res, 'Please upload an image', [], 400);
+  }
+
+  const ImagePath = ImageLink(
+      `${req.file.fieldname}-${Date.now()}${path.extname(req.file.originalname)}`,
+  );
+  await fs.writeFile(ImagePath, req.file.buffer);
 
     if (!title || !youtubeLink || !img) {
       console.log('req.body:', req.body)
@@ -32,7 +41,7 @@ export const addSong = async (req, res, next) => {
       spotifyLink,
       appleMusicLink,
       amazonLink,
-      img: img.buffer, 
+      img: ImagePath, 
       albums,
     });
 
