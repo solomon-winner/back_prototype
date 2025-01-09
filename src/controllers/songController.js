@@ -2,6 +2,8 @@ import { SongDTO } from "../dtos/song/songDto.js";
 import Song from "../models/songsModel.js";
 import ResponseHelper from "../helpers/responseHelper.js";
 import { ImageLink } from "../services/ImageLink.js";
+import path from 'path';
+import fs from 'fs/promises';
 
 export const addSong = async (req, res, next) => {
   try {
@@ -23,9 +25,8 @@ export const addSong = async (req, res, next) => {
   );
   await fs.writeFile(ImagePath, req.file.buffer);
 
-    if (!title || !youtubeLink || !img) {
+    if (!title || !youtubeLink) {
       console.log('req.body:', req.body)
-      console.log('req.file:', req.file);
 
       return ResponseHelper.error(
         res,

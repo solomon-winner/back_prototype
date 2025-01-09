@@ -23,12 +23,13 @@ const router = express.Router();
  *         title:
  *           type: string
  *           example: "New Song"
- *         link:
+ *         youtubeLink:
  *           type: string
  *           example: "https://example.com/song.mp3"
  *         img:
  *           type: string
- *           example: "https://example.com/image.jpg"
+ *           description: The URL of the uploaded image.
+ *           example: "https://example.com/uploads/image.jpg"
  *         albums:
  *           type: array
  *           items:
@@ -49,12 +50,12 @@ const router = express.Router();
  * /api/songs:
  *   post:
  *     summary: Add a new song
- *     description: Create a new song with title, link, img, and albums.
+ *     description: Create a new song with title, link, an image file, and albums.
  *     tags: [Songs]
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -62,14 +63,14 @@ const router = express.Router();
  *                 type: string
  *                 description: The title of the song.
  *                 example: "New Song"
- *               link:
+ *               youtubeLink:
  *                 type: string
  *                 description: The link to the song.
  *                 example: "https://example.com/song.mp3"
  *               img:
  *                 type: string
- *                 description: The image URL of the song.
- *                 example: "https://example.com/image.jpg"
+ *                 format: binary
+ *                 description: The image file for the song.
  *               albums:
  *                 type: array
  *                 items:
