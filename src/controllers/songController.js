@@ -7,6 +7,15 @@ import fs from 'fs/promises';
 
 export const addSong = async (req, res, next) => {
   try {
+
+    if (req.headers['content-type'].includes('multipart/form-data')) {
+      console.log('The form is submitted as multipart/form-data');
+    }
+    else {
+      console.log('The form is not submitted as multipart/form-data');
+      return ResponseHelper.error(res, 'The form is not submitted as multipart/form-data', [], 400);
+    }
+
     const { 
       title, 
       youtubeLink, 
