@@ -34,6 +34,12 @@ const SongSchema = new mongoose.Schema(
         type: String,
       },
     ],
+    type: {
+      type: String,
+      required: true,
+      enum: ['song', 'album'],
+      trim: true,   
+    }
   },
   {
     timestamps: true,
