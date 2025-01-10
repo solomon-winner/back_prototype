@@ -7,6 +7,11 @@ const GeneralSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    bannerTitle: {
+      type: String,
+      required: true,
+      trim: true,      
+    },
     bannerInfo: {
       type: String,
       required: true,
@@ -25,11 +30,11 @@ const GeneralSchema = new mongoose.Schema(
     visitors: {
       type: Number
     },
-    subscribers: [
-      {
-        type: String
-      }
-    ],
+    // subscribers: [
+    //   {
+    //     type: String
+    //   }
+    // ],
     bannerCards: [
       {
         type: mongoose.Schema.Types.ObjectId,
