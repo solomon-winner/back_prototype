@@ -18,6 +18,6 @@ const BannerCardsSchema = new mongoose.Schema(
   },
 );
 
-const BannerCards = mongoose.model("Message", BannerCardsSchema);
+const BannerCards = mongoose.model("BannerCard", BannerCardsSchema);
 
 export default BannerCards;
