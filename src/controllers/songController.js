@@ -59,7 +59,8 @@ export const addSong = async (req, res, next) => {
 
 export const getSongs = async (req, res, next) => {
   try {
-    const songs = await Song.find({});
+    const { type } = req.query; 
+    const songs = await Song.find({type: type});
     const songsDtos = songs.map((song) => new SongDTO(song));
     return ResponseHelper.success(res, "Songs fetched successfully", songsDtos);
   } catch (error) {
@@ -111,7 +112,7 @@ export const updateSong = async (req, res, next) => {
     }
 
     return ResponseHelper.success(res, "Song updated successfully", {
-      song: new SongDTO(song),
+      song: new SongDTO(updatedSong),
     });
   } catch (error) {
     next(error);

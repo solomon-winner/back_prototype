@@ -1,5 +1,5 @@
 export class SongDTO {
-  constructor({_id, title,youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums, createdAt, updatedAt}) {
+  constructor({_id, title,youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums, type, createdAt, updatedAt}) {
     this.id = _id;
     this.title = title;
     this.youtube_link = youtube_link;
@@ -7,7 +7,8 @@ export class SongDTO {
     this.appleMusicLink = appleMusicLink;
     this.amazonLink = amazonLink;
     this.img = img;
-    this.type = albums;
+    this.songs = albums;
+    this.type = type;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
