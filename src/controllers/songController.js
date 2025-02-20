@@ -13,7 +13,8 @@ export const addSong = async (req, res, next) => {
       spotifyLink, 
       appleMusicLink, 
       amazonLink, 
-      albums
+      albums,
+      type
      } = req.body;
 
      if (!req.file) {
@@ -44,6 +45,7 @@ export const addSong = async (req, res, next) => {
       amazonLink,
       img: ImagePath, 
       albums,
+      type
     });
 
     await newSong.save();
