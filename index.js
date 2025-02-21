@@ -24,7 +24,7 @@ app.use(cors());
 dbConfig();
 
 app.get("/", (req, res) => {
-  res.send("Welcome to European Union Deforestation Regulation");
+  res.send("This is the prototype of the Back end of the websites which I will build and building!");
 });
 
 app.use("/api/authentication", AuthRoutes);

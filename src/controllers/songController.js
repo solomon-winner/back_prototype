@@ -13,10 +13,9 @@ export const addSong = async (req, res, next) => {
       spotifyLink, 
       appleMusicLink, 
       amazonLink, 
-      albums,
+      songs,
       type
      } = req.body;
-
      if (!req.file) {
       return ResponseHelper.error(res, 'Please upload an image', [], 400);
   }
@@ -27,7 +26,6 @@ export const addSong = async (req, res, next) => {
   await fs.writeFile(ImagePath, req.file.buffer);
 
     if (!title || !youtubeLink) {
-      console.log('req.body:', req.body)
 
       return ResponseHelper.error(
         res,
@@ -44,7 +42,7 @@ export const addSong = async (req, res, next) => {
       appleMusicLink,
       amazonLink,
       img: ImagePath, 
-      albums,
+      albums:songs,
       type
     });
 
