@@ -173,7 +173,7 @@ router.post("/", upload.single('img'), addSong);
  *       500:
  *         description: Internal server error
  */
-router.put("/:id", updateSong);
+router.put("/:id", upload.single('img'),updateSong);
 
 /**
  * @swagger

@@ -96,21 +96,54 @@ export const removeSong = async (req, res, next) => {
   }
 };
 
+import fs from 'fs/promises';
+import path from 'path';
+import Song from '../models/Song.js'; // Adjust the import path as needed
+import ResponseHelper from '../utils/ResponseHelper.js'; // Adjust the import path as needed
+import SongDTO from '../dtos/SongDTO.js'; // Adjust the import path as needed
+
 export const updateSong = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { title, youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums } = req.body;
+    const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, albums } = req.body;
 
-    const updatedSong = await Song.findByIdAndUpdate(
-      id,
-      { title, youtube_link, spotifyLink, appleMusicLink, amazonLink, img, albums },
-      { new: true }
-    );
-
+    // Find the song by ID
+    const updatedSong = await Song.findOne({ _id: id });
     if (!updatedSong) {
       return ResponseHelper.error(res, "Song not found", [], 404);
     }
 
+    // Update the song fields
+    updatedSong.title = title || updatedSong.title;
+    updatedSong.youtubeLink = youtubeLink || updatedSong.youtubeLink;
+    updatedSong.spotifyLink = spotifyLink || updatedSong.spotifyLink;
+    updatedSong.appleMusicLink = appleMusicLink || updatedSong.appleMusicLink;
+    updatedSong.amazonLink = amazonLink || updatedSong.amazonLink;
+    updatedSong.songs = albums || updatedSong.songs;
+
+    // Handle file upload (if a new file is provided)
+    if (req.file) {
+      // Delete the old file if it exists
+      if (updatedSong.img) {
+        const oldFilePath = path.resolve(updatedSong.img);
+        try {
+          await fs.access(oldFilePath);
+          await fs.unlink(oldFilePath);
+        } catch (error) {
+          if (error.code !== 'ENOENT') {
+            throw error; // Re-throw if the error is not "file not found"
+          }
+        }
+      }
+
+      // Save the new file path
+      updatedSong.img = req.file.path; // Assuming multer saves the file and provides the path
+    }
+
+    // Save the updated song
+    await updatedSong.save();
+
+    // Return success response
     return ResponseHelper.success(res, "Song updated successfully", {
       song: new SongDTO(updatedSong),
     });
