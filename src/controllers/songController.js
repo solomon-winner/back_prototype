@@ -96,12 +96,6 @@ export const removeSong = async (req, res, next) => {
   }
 };
 
-import fs from 'fs/promises';
-import path from 'path';
-import Song from '../models/Song.js'; // Adjust the import path as needed
-import ResponseHelper from '../utils/ResponseHelper.js'; // Adjust the import path as needed
-import SongDTO from '../dtos/SongDTO.js'; // Adjust the import path as needed
-
 export const updateSong = async (req, res, next) => {
   try {
     const { id } = req.params;
