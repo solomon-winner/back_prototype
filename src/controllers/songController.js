@@ -99,8 +99,7 @@ export const removeSong = async (req, res, next) => {
 export const updateSong = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, albums } = req.body;
-
+    const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, songs } = req.body;
     // Find the song by ID
     const updatedSong = await Song.findOne({ _id: id });
     if (!updatedSong) {
@@ -113,7 +112,7 @@ export const updateSong = async (req, res, next) => {
     updatedSong.spotifyLink = spotifyLink || updatedSong.spotifyLink;
     updatedSong.appleMusicLink = appleMusicLink || updatedSong.appleMusicLink;
     updatedSong.amazonLink = amazonLink || updatedSong.amazonLink;
-    updatedSong.songs = albums || updatedSong.songs;
+    updatedSong.albums = songs || updatedSong.albums;
 
     // Handle file upload (if a new file is provided)
     if (req.file) {
@@ -129,9 +128,12 @@ export const updateSong = async (req, res, next) => {
           }
         }
       }
-
+      const ImagePath = ImageLink(
+        `${req.file.fieldname}-${Date.now()}${path.extname(req.file.originalname)}`,
+    );
+    await fs.writeFile(ImagePath, req.file.buffer);
       // Save the new file path
-      updatedSong.img = req.file.path; // Assuming multer saves the file and provides the path
+      updatedSong.img =ImagePath; // Assuming multer saves the file and provides the path
     }
 
     // Save the updated song
