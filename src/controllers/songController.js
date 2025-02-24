@@ -101,6 +101,7 @@ export const updateSong = async (req, res, next) => {
     const { id } = req.params;
     const { title, youtubeLink, spotifyLink, appleMusicLink, amazonLink, songs } = req.body;
     // Find the song by ID
+    console.log(id, req.body);
     const updatedSong = await Song.findOne({ _id: id });
     if (!updatedSong) {
       return ResponseHelper.error(res, "Song not found", [], 404);
