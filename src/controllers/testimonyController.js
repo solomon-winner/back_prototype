@@ -4,8 +4,9 @@ import ResponseHelper from "../helpers/responseHelper.js";
 
 export const addTestimony = async (req, res, next) => {
   try {
-    const { email, testimony, verified } = req.body;
+    const { testifierName, email, testimony, verified } = req.body;
     const newTestimony = new Testimony({
+      testifierName,
       email,
       testimony,
       verified,

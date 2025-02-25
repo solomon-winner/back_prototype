@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const TestimonySchema = new mongoose.Schema(
   {
+    testifierName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     testimony: {
       type: String,
       required: true,
@@ -14,7 +19,7 @@ const TestimonySchema = new mongoose.Schema(
     },
     verified: {
       type: String,
-      required: true,
+      default: false,
       trim: true,
     },
   },
