@@ -5,6 +5,7 @@ import {
   deleteGeneralInfo,
   getGeneralInfo
 } from "../controllers/generalInfoController.js";
+import upload from "../middlewares/upload.js";
 
 const router = express.Router();
 
@@ -105,7 +106,10 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post("/", addGeneralInfo);
+router.post("/", upload.fields([
+  { name: "bannerPic", maxCount: 1 },
+  { name: "aboutPic", maxCount: 1 },
+]), addGeneralInfo);
 
 /**
  * @swagger
@@ -165,7 +169,10 @@ router.post("/", addGeneralInfo);
  *       500:
  *         description: Internal server error
  */
-router.put("/", updateGeneralInfo);
+router.put("/",  upload.fields([
+  { name: "bannerPic", maxCount: 1 },
+  { name: "aboutPic", maxCount: 1 },
+]), updateGeneralInfo);
 
 /**
  * @swagger

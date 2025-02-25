@@ -1,6 +1,9 @@
 import { GeneralDTO } from "../dtos/general/generalInfoDto.js";
 import ResponseHelper from "../helpers/responseHelper.js";
 import General from "../models/generalInfo.js";
+import { ImageLink } from "../services/ImageLink.js";
+import path from 'path';
+import fs from 'fs/promises';
 
 export const getGeneralInfo = async (req, res, next) => {
   try {
@@ -17,42 +20,85 @@ export const getGeneralInfo = async (req, res, next) => {
 
 export const updateGeneralInfo = async (req, res, next) => {
   try {
-    const {
-      bannerPic,
-      bannerInfo,
-      aboutPic,
-      aboutInfo,
-      bannerCards,
+    const { bannerInfo, aboutInfo, bannerCards } = req.body;
 
-    } = req.body;
+    // Find the existing general info
     const info = await General.findOne();
 
     if (!info) {
-      return ResponseHelper.error(
-        res,
-        "general Information not found",
-        [],
-        404,
-      );
+      return ResponseHelper.error(res, "General Information not found", [], 404);
     }
 
-    if (bannerPic) info.bannerPic = bannerPic;
+    if (req.files && req.files["bannerPic"]) {
+      const bannerPicFile = req.files["bannerPic"][0];
+
+      // Delete the old bannerPic file if it exists
+      if (info.bannerPic) {
+        const oldFilePath = path.resolve(info.bannerPic);
+        try {
+          await fs.access(oldFilePath);
+          await fs.unlink(oldFilePath);
+        } catch (error) {
+          if (error.code !== "ENOENT") {
+            throw error; // Re-throw if the error is not "file not found"
+          }
+        }
+      }
+
+      // Save the new bannerPic file
+      const bannerPicPath = ImageLink(
+        `${bannerPicFile.fieldname}-${Date.now()}${path.extname(bannerPicFile.originalname)}`
+      );
+      await fs.writeFile(bannerPicPath, bannerPicFile.buffer);
+
+      // Update the bannerPic path in the database
+      info.bannerPic = bannerPicPath;
+    }
+
+    // Handle aboutPic file upload
+    if (req.files && req.files["aboutPic"]) {
+      const aboutPicFile = req.files["aboutPic"][0];
+
+      // Delete the old aboutPic file if it exists
+      if (info.aboutPic) {
+        const oldFilePath = path.resolve(info.aboutPic);
+        try {
+          await fs.access(oldFilePath);
+          await fs.unlink(oldFilePath);
+        } catch (error) {
+          if (error.code !== "ENOENT") {
+            throw error; // Re-throw if the error is not "file not found"
+          }
+        }
+      }
+
+      // Save the new aboutPic file
+      const aboutPicPath = ImageLink(
+        `${aboutPicFile.fieldname}-${Date.now()}${path.extname(aboutPicFile.originalname)}`
+      );
+      await fs.writeFile(aboutPicPath, aboutPicFile.buffer);
+
+      // Update the aboutPic path in the database
+      info.aboutPic = aboutPicPath;
+    }
+
+    // Update other fields
     if (bannerInfo) info.bannerInfo = bannerInfo;
-    if (aboutPic) info.aboutPic = aboutPic;
     if (aboutInfo) info.aboutInfo = aboutInfo;
     if (bannerCards) info.bannerCards = bannerCards;
 
+    // Save the updated info
     await info.save();
+
     return ResponseHelper.success(
       res,
       "General Information updated successfully",
-      { info: new GeneralDTO(info) },
+      { info: new GeneralDTO(info) }
     );
   } catch (error) {
     next(error);
   }
 };
-
 export const deleteGeneralInfo = async (req, res, next) => {
   try {
     const existingInfo = await General.findOneAndDelete();
