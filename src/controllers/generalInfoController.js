@@ -46,13 +46,15 @@ export const updateGeneralInfo = async (req, res, next) => {
       }
 
       // Save the new bannerPic file
-      const bannerPicPath = ImageLink(
+      const { fullPath, relativePath } = ImageLink(
         `${bannerPicFile.fieldname}-${Date.now()}${path.extname(bannerPicFile.originalname)}`
       );
-      await fs.writeFile(bannerPicPath, bannerPicFile.buffer);
+      // console.log("bannerPicPath", bannerPicPath)
+
+      await fs.writeFile(fullPath, bannerPicFile.buffer);
 
       // Update the bannerPic path in the database
-      info.bannerPic = bannerPicPath;
+      info.bannerPic = relativePath;
     }
 
     // Handle aboutPic file upload
@@ -73,13 +75,13 @@ export const updateGeneralInfo = async (req, res, next) => {
       }
 
       // Save the new aboutPic file
-      const aboutPicPath = ImageLink(
+      const { fullPath, relativePath } = ImageLink(
         `${aboutPicFile.fieldname}-${Date.now()}${path.extname(aboutPicFile.originalname)}`
       );
-      await fs.writeFile(aboutPicPath, aboutPicFile.buffer);
+      await fs.writeFile(fullPath, aboutPicFile.buffer);
 
       // Update the aboutPic path in the database
-      info.aboutPic = aboutPicPath;
+      info.aboutPic = relativePath;
     }
 
     // Update other fields

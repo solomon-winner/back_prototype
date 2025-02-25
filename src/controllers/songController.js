@@ -20,10 +20,10 @@ export const addSong = async (req, res, next) => {
       return ResponseHelper.error(res, 'Please upload an image', [], 400);
   }
 
-  const ImagePath = ImageLink(
+  const { fullPath, relativePath }  = ImageLink(
       `${req.file.fieldname}-${Date.now()}${path.extname(req.file.originalname)}`,
   );
-  await fs.writeFile(ImagePath, req.file.buffer);
+  await fs.writeFile(fullPath, req.file.buffer);
 
     if (!title || !youtubeLink) {
 
@@ -41,7 +41,7 @@ export const addSong = async (req, res, next) => {
       spotifyLink,
       appleMusicLink,
       amazonLink,
-      img: ImagePath, 
+      img: relativePath, 
       albums:songs,
       type
     });
@@ -128,12 +128,12 @@ export const updateSong = async (req, res, next) => {
           }
         }
       }
-      const ImagePath = ImageLink(
+      const { fullPath, relativePath } = ImageLink(
         `${req.file.fieldname}-${Date.now()}${path.extname(req.file.originalname)}`,
     );
-    await fs.writeFile(ImagePath, req.file.buffer);
+    await fs.writeFile(fullPath, req.file.buffer);
       // Save the new file path
-      updatedSong.img =ImagePath; // Assuming multer saves the file and provides the path
+      updatedSong.img = relativePath; // Assuming multer saves the file and provides the path
     }
 
     // Save the updated song
