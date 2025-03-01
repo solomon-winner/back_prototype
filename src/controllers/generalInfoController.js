@@ -20,7 +20,7 @@ export const getGeneralInfo = async (req, res, next) => {
 
 export const updateGeneralInfo = async (req, res, next) => {
   try {
-    const { bannerInfo, aboutInfo, bannerCards } = req.body;
+    const { title, bannerInfo, aboutInfo, bannerCards } = req.body;
 
     // Find the existing general info
     const info = await General.findOne();
@@ -88,7 +88,7 @@ export const updateGeneralInfo = async (req, res, next) => {
     if (bannerInfo) info.bannerInfo = bannerInfo;
     if (aboutInfo) info.aboutInfo = aboutInfo;
     if (bannerCards) info.bannerCards = bannerCards;
-
+    if (title) info.bannerTitle = title;
     // Save the updated info
     await info.save();
 

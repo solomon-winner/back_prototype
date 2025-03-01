@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const dbConfig = async () => {
-  const mongoURI = process.env.MONGO_URI;
+  const mongoURI = process.env.MONGOCOMPASS;
 
   try {
     await mongoose.connect(mongoURI);

@@ -87,9 +87,23 @@ export const removeSong = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedSong = await Song.findByIdAndDelete(id);
+    
     if (!deletedSong) {
       return ResponseHelper.error(res, "Song doesn't exist!", [], 400);
     }
+
+    // Delete associated image file if it exists
+    if (deletedSong.img) {
+      try {
+        // Construct the absolute path to the image file
+        const imagePath = path.join(process.cwd(), 'public', deletedSong.img);
+        await fs.unlink(imagePath);
+      } catch (err) {
+        console.error('Error deleting image file:', err.message);
+        // Optionally log the error but do not interrupt the response
+      }
+    }
+
     return ResponseHelper.success(res, "Song deleted successfully");
   } catch (error) {
     next(error);

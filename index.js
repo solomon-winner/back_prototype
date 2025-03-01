@@ -12,12 +12,17 @@ import TestimonyRoutes from "./src/routes/testimonyRoute.js";
 import SubscriberRoutes from "./src/routes/subscriberRoute.js";
 import VisitorRoutes from "./src/routes/visitorRoute.js";
 import { specs, swaggerUi } from "./src/config/swaggerConfig.js";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(cors());
 

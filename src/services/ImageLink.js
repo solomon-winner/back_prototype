@@ -17,6 +17,6 @@ export const ImageLink = (Image) => {
     // Return both the full filesystem path and the relative path
     return {
         fullPath: path.join(ImageDir, Image), // Full path for saving the file
-        relativePath: path.join('Image', Image) // Relative path for storing in the database
+        relativePath: path.join('Image', Image).replace(/\\/g, "/") // Relative path for storing in the database
     };
 };
